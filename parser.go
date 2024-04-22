@@ -146,6 +146,10 @@ func (p *parser) recordFailure(line *line, rpt *testrun) {
 // recordSkip records a test skip, updating the test result and incrementing
 // the number of skipped tests in the testrun.
 func (p *parser) recordSkip(line *line, rpt *testrun) {
+	if line.Test == nil {
+		p.pkgs[line.Package].passed = false
+		return
+	}
 	p.tests[line.Package][*line.Test].result = trSkipped
 	rpt.numSkipped++
 }
