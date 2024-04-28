@@ -85,8 +85,9 @@ func (p *parser) addPackage(line *line, rpt *testrun) {
 // from the line, setting the initial state of the test result to failed.
 func (p *parser) addTest(line *line, rpt *testrun) {
 	ti := &testinfo{
-		path:   *line.Test,
-		output: map[string][]string{},
+		path:        *line.Test,
+		output:      map[string][]string{},
+		packageName: line.Package,
 	}
 	p.tests[line.Package][*line.Test] = ti
 	pkg := p.pkgs[line.Package]
@@ -193,7 +194,10 @@ func (p *parser) processTestOutput(test *testinfo) {
 			continue
 		}
 		if test.result != trSkipped || !skiplog.MatchString(s) {
-			test.output[ref] = append(test.output[ref], s[8:len(s)-1])
+			if strings.HasPrefix(s, "        ") {
+				s = s[8 : len(s)-1]
+			}
+			test.output[ref] = append(test.output[ref], s)
 		}
 	}
 }

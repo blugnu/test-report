@@ -21,9 +21,10 @@ const (
 
 // testinfo contains information about a single test.
 type testinfo struct {
-	path    string        // the path to (name of) the test
-	result  testResult    // the result of the test
-	elapsed time.Duration // the time taken to run the test (if recorded)
+	path        string        // the path to (name of) the test
+	result      testResult    // the result of the test
+	elapsed     time.Duration // the time taken to run the test (if recorded)
+	packageName string        // the name of the package containing the test
 
 	// the output of the test; during parsing all output is added to
 	// a "raw" item in the map.  Once all output has been parsed, the "raw"
