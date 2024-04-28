@@ -1,11 +1,15 @@
 package pkgb
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestPasses(t *testing.T) {}
 
 func TestFails(t *testing.T) {
 	t.Error("this test fails\nwith four\nlines of output\n  the last is indented")
+	fmt.Print("raw output is not indented (unlike test failure output)")
 }
 
 func TestSkipped(t *testing.T) {

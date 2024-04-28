@@ -76,11 +76,12 @@ func TestParse(t *testing.T) {
 				test.That(t, report.numSkipped).Equals(2, "tests skipped")
 
 				test.Map(t, report.packages[1].tests[1].output).Equals(map[string][]string{
-					"pkgb_test.go:8": {
+					"pkgb_test.go:11": {
 						"this test fails",
 						"with four",
 						"lines of output",
 						"  the last is indented",
+						"raw output is not indented (unlike test failure output)",
 					},
 				})
 			},
