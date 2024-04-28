@@ -19,12 +19,11 @@
 # go coverage tool output
 *.out
 
-# dependency directories (uncomment the line below to include)
-# vendor/
+# any binary or goreleaser builds
+dist/**
+test-report
 
 # test data (generated when parser_test.go is run)
 testdata/*.json
-
-# any binary or test/sample report (md) in the root
-test-report
+# any test/sample report (md) in the root
 test-report.md
