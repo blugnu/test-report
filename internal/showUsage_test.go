@@ -1,4 +1,4 @@
-package main
+package internal
 
 import (
 	"testing"
@@ -12,7 +12,7 @@ func TestShowUsage(t *testing.T) {
 
 	// ACT
 	stdout, _ := test.CaptureOutput(t, func() {
-		cmd.run(nil)
+		cmd.Run(nil)
 	})
 
 	// ASSERT

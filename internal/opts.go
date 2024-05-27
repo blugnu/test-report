@@ -1,4 +1,4 @@
-package main
+package internal
 
 import (
 	"flag"
@@ -7,16 +7,16 @@ import (
 
 // parseFlags if a variable function that parses the command line arguments.
 // This is a variable so that it can be replaced in tests to avoid side effects.
-var parseFlags = func(f *flag.FlagSet, args []string) error {
+var ParseFlags = func(f *flag.FlagSet, args []string) error {
 	return f.Parse(args)
 }
 
-// opts is a struct that implements a parser for the program options.
-type opts struct{}
+// Options is a struct that implements a parser for the program options.
+type Options struct{}
 
 // parse is a method that parses the command line arguments and returns the
 // appropriate command to run (if any).
-func (o *opts) parse() (interface{ run(*opts) }, error) {
+func (o *Options) Parse() (interface{ Run(*Options) int }, error) {
 	var (
 		of string     = "test-report.md"
 		rm reportMode = rmFailedTests
@@ -47,7 +47,7 @@ func (o *opts) parse() (interface{ run(*opts) }, error) {
 		flags.BoolVar(&opts.summary, "summary", false, "")
 		flags.StringVar(&opts.t, "t", "", "report title")
 		flags.StringVar(&opts.title, "title", "", "")
-		if err := parseFlags(flags, os.Args[1:]); err != nil {
+		if err := ParseFlags(flags, os.Args[1:]); err != nil {
 			return nil, err
 		}
 
@@ -82,6 +82,7 @@ func (o *opts) parse() (interface{ run(*opts) }, error) {
 			filename: of,
 			title:    rt,
 			mode:     rm,
+			parser:   &parser{},
 		}, nil
 	}
 }

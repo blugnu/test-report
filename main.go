@@ -1,13 +1,20 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+
+	"github.com/blugnu/test-report/internal"
+)
+
+var osExit = os.Exit
 
 // main parses options and runs the command determined by those options
 func main() {
-	opts := &opts{}
-	if cmd, err := opts.parse(); err != nil {
+	opts := &internal.Options{}
+	if cmd, err := opts.Parse(); err != nil {
 		fmt.Println("ERROR:", err)
 	} else {
-		cmd.run(opts)
+		osExit(cmd.Run(opts))
 	}
 }

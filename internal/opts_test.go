@@ -1,4 +1,4 @@
-package main
+package internal
 
 import (
 	"flag"
@@ -20,19 +20,15 @@ func TestOpts(t *testing.T) {
 				// ARRANGE
 				flagserr := fmt.Errorf("flags error")
 
-				oga := os.Args
-				defer func() { os.Args = oga }()
-				os.Args = []string{"test-report", "-invalid-flag"}
-
-				ogpf := parseFlags
-				defer func() { parseFlags = ogpf }()
-				parseFlags = func(f *flag.FlagSet, args []string) error {
+				defer test.Using(&os.Args, []string{"test-report", "-invalid-flag"})()
+				defer test.Using(&ParseFlags, func(f *flag.FlagSet, args []string) error {
 					return flagserr
-				}
-				opts := &opts{}
+				})()
+
+				opts := &Options{}
 
 				// ACT
-				result, err := opts.parse()
+				result, err := opts.Parse()
 
 				// ASSERT
 				test.Error(t, err).Is(flagserr)
@@ -43,7 +39,7 @@ func TestOpts(t *testing.T) {
 			exec: func(t *testing.T) {
 				testcases := []struct {
 					args   []string
-					result interface{ run(*opts) }
+					result interface{ Run(*Options) int }
 				}{
 					{args: []string{"version"}, result: showVersion{}},
 					{args: []string{"-h"}, result: showUsage{}},
@@ -53,6 +49,7 @@ func TestOpts(t *testing.T) {
 							filename: "test-report.md",
 							title:    "Test Report",
 							mode:     rmFailedTests,
+							parser:   &parser{},
 						},
 					},
 					{args: []string{"-o", "report.md"},
@@ -60,6 +57,7 @@ func TestOpts(t *testing.T) {
 							filename: "report.md",
 							title:    "Test Report",
 							mode:     rmFailedTests,
+							parser:   &parser{},
 						},
 					},
 					{args: []string{"-output", "report.md"},
@@ -67,6 +65,7 @@ func TestOpts(t *testing.T) {
 							filename: "report.md",
 							title:    "Test Report",
 							mode:     rmFailedTests,
+							parser:   &parser{},
 						},
 					},
 					{args: []string{"-t", "My Title"},
@@ -74,6 +73,7 @@ func TestOpts(t *testing.T) {
 							filename: "test-report.md",
 							title:    "My Title",
 							mode:     rmFailedTests,
+							parser:   &parser{},
 						},
 					},
 					{args: []string{"-title", "My Title"},
@@ -81,6 +81,7 @@ func TestOpts(t *testing.T) {
 							filename: "test-report.md",
 							title:    "My Title",
 							mode:     rmFailedTests,
+							parser:   &parser{},
 						},
 					},
 					{args: []string{"-f"},
@@ -88,6 +89,7 @@ func TestOpts(t *testing.T) {
 							filename: "test-report.md",
 							title:    "Test Report",
 							mode:     rmAllTests,
+							parser:   &parser{},
 						},
 					},
 					{args: []string{"-full"},
@@ -95,6 +97,7 @@ func TestOpts(t *testing.T) {
 							filename: "test-report.md",
 							title:    "Test Report",
 							mode:     rmAllTests,
+							parser:   &parser{},
 						},
 					},
 					{args: []string{"-s"},
@@ -102,6 +105,7 @@ func TestOpts(t *testing.T) {
 							filename: "test-report.md",
 							title:    "Test Report",
 							mode:     rmSummaryOnly,
+							parser:   &parser{},
 						},
 					},
 					{args: []string{"-summary"},
@@ -109,6 +113,7 @@ func TestOpts(t *testing.T) {
 							filename: "test-report.md",
 							title:    "Test Report",
 							mode:     rmSummaryOnly,
+							parser:   &parser{},
 						},
 					},
 				}
@@ -118,10 +123,10 @@ func TestOpts(t *testing.T) {
 						defer func() { os.Args = og }()
 
 						os.Args = append([]string{"test-report"}, tc.args...)
-						sut := &opts{}
+						sut := &Options{}
 
 						// ACT
-						result, err := sut.parse()
+						result, err := sut.Parse()
 
 						// ASSERT
 						test.Error(t, err).IsNil()

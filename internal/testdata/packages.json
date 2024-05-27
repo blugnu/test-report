@@ -1,0 +1,54 @@
+{"Time":"2024-05-28T10:04:03.767432+12:00","Action":"start","Package":"github.com/blugnu/test-report/internal/testdata/pkga"}
+{"Time":"2024-05-28T10:04:03.767524+12:00","Action":"run","Package":"github.com/blugnu/test-report/internal/testdata/pkga","Test":"TestPasses"}
+{"Time":"2024-05-28T10:04:03.767528+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkga","Test":"TestPasses","Output":"=== RUN   TestPasses\n"}
+{"Time":"2024-05-28T10:04:03.76754+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkga","Test":"TestPasses","Output":"--- PASS: TestPasses (0.00s)\n"}
+{"Time":"2024-05-28T10:04:03.767543+12:00","Action":"pass","Package":"github.com/blugnu/test-report/internal/testdata/pkga","Test":"TestPasses","Elapsed":0}
+{"Time":"2024-05-28T10:04:03.767553+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkga","Output":"PASS\n"}
+{"Time":"2024-05-28T10:04:03.767558+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkga","Output":"ok  \tgithub.com/blugnu/test-report/internal/testdata/pkga\t(cached)\n"}
+{"Time":"2024-05-28T10:04:03.767569+12:00","Action":"pass","Package":"github.com/blugnu/test-report/internal/testdata/pkga","Elapsed":0}
+{"Time":"2024-05-28T10:04:03.841716+12:00","Action":"start","Package":"github.com/blugnu/test-report/internal/testdata/pkgb"}
+{"Time":"2024-05-28T10:04:03.965677+12:00","Action":"run","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestPasses"}
+{"Time":"2024-05-28T10:04:03.965712+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestPasses","Output":"=== RUN   TestPasses\n"}
+{"Time":"2024-05-28T10:04:03.96609+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestPasses","Output":"--- PASS: TestPasses (0.00s)\n"}
+{"Time":"2024-05-28T10:04:03.966097+12:00","Action":"pass","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestPasses","Elapsed":0}
+{"Time":"2024-05-28T10:04:03.966106+12:00","Action":"run","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestFails"}
+{"Time":"2024-05-28T10:04:03.966109+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestFails","Output":"=== RUN   TestFails\n"}
+{"Time":"2024-05-28T10:04:03.966112+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestFails","Output":"    pkgb_test.go:11: this test fails\n"}
+{"Time":"2024-05-28T10:04:03.966119+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestFails","Output":"        with four\n"}
+{"Time":"2024-05-28T10:04:03.966131+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestFails","Output":"        lines of output\n"}
+{"Time":"2024-05-28T10:04:03.966133+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestFails","Output":"          the last is indented\n"}
+{"Time":"2024-05-28T10:04:03.966149+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestFails","Output":"raw output is not indented (unlike test failure output)"}
+{"Time":"2024-05-28T10:04:03.966163+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestFails","Output":"--- FAIL: TestFails (0.00s)\n"}
+{"Time":"2024-05-28T10:04:03.966167+12:00","Action":"fail","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestFails","Elapsed":0}
+{"Time":"2024-05-28T10:04:03.966171+12:00","Action":"run","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSkipped"}
+{"Time":"2024-05-28T10:04:03.966183+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSkipped","Output":"=== RUN   TestSkipped\n"}
+{"Time":"2024-05-28T10:04:03.966185+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSkipped","Output":"    pkgb_test.go:16: this test is skipped\n"}
+{"Time":"2024-05-28T10:04:03.966188+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSkipped","Output":"--- SKIP: TestSkipped (0.00s)\n"}
+{"Time":"2024-05-28T10:04:03.966191+12:00","Action":"skip","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSkipped","Elapsed":0}
+{"Time":"2024-05-28T10:04:03.966194+12:00","Action":"run","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest"}
+{"Time":"2024-05-28T10:04:03.966196+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest","Output":"=== RUN   TestSubtest\n"}
+{"Time":"2024-05-28T10:04:03.9662+12:00","Action":"run","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest/subtest"}
+{"Time":"2024-05-28T10:04:03.966202+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest/subtest","Output":"=== RUN   TestSubtest/subtest\n"}
+{"Time":"2024-05-28T10:04:03.966208+12:00","Action":"run","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest/subtest/fails"}
+{"Time":"2024-05-28T10:04:03.966211+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest/subtest/fails","Output":"=== RUN   TestSubtest/subtest/fails\n"}
+{"Time":"2024-05-28T10:04:03.966214+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest/subtest/fails","Output":"    pkgb_test.go:22: this test fails\n"}
+{"Time":"2024-05-28T10:04:03.966217+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest/subtest/fails","Output":"--- FAIL: TestSubtest/subtest/fails (0.00s)\n"}
+{"Time":"2024-05-28T10:04:03.96622+12:00","Action":"fail","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest/subtest/fails","Elapsed":0}
+{"Time":"2024-05-28T10:04:03.966223+12:00","Action":"run","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest/subtest/passes"}
+{"Time":"2024-05-28T10:04:03.966225+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest/subtest/passes","Output":"=== RUN   TestSubtest/subtest/passes\n"}
+{"Time":"2024-05-28T10:04:03.966227+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest/subtest/passes","Output":"    pkgb_test.go:26: this test passes\n"}
+{"Time":"2024-05-28T10:04:03.96623+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest/subtest/passes","Output":"    pkgb_test.go:27: with two lines of output\n"}
+{"Time":"2024-05-28T10:04:03.966234+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest/subtest/passes","Output":"--- PASS: TestSubtest/subtest/passes (0.00s)\n"}
+{"Time":"2024-05-28T10:04:03.966236+12:00","Action":"pass","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest/subtest/passes","Elapsed":0}
+{"Time":"2024-05-28T10:04:03.966239+12:00","Action":"run","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest/subtest/skipped"}
+{"Time":"2024-05-28T10:04:03.966244+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest/subtest/skipped","Output":"=== RUN   TestSubtest/subtest/skipped\n"}
+{"Time":"2024-05-28T10:04:03.966247+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest/subtest/skipped","Output":"    pkgb_test.go:31: this test is skipped\n"}
+{"Time":"2024-05-28T10:04:03.96625+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest/subtest/skipped","Output":"--- SKIP: TestSubtest/subtest/skipped (0.00s)\n"}
+{"Time":"2024-05-28T10:04:03.966253+12:00","Action":"skip","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest/subtest/skipped","Elapsed":0}
+{"Time":"2024-05-28T10:04:03.966259+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest/subtest","Output":"--- FAIL: TestSubtest/subtest (0.00s)\n"}
+{"Time":"2024-05-28T10:04:03.966262+12:00","Action":"fail","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest/subtest","Elapsed":0}
+{"Time":"2024-05-28T10:04:03.966264+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest","Output":"--- FAIL: TestSubtest (0.00s)\n"}
+{"Time":"2024-05-28T10:04:03.966267+12:00","Action":"fail","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Test":"TestSubtest","Elapsed":0}
+{"Time":"2024-05-28T10:04:03.966269+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Output":"FAIL\n"}
+{"Time":"2024-05-28T10:04:03.966437+12:00","Action":"output","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Output":"FAIL\tgithub.com/blugnu/test-report/internal/testdata/pkgb\t0.125s\n"}
+{"Time":"2024-05-28T10:04:03.966451+12:00","Action":"fail","Package":"github.com/blugnu/test-report/internal/testdata/pkgb","Elapsed":0.125}

@@ -7,6 +7,8 @@ import (
 	"testing"
 
 	"github.com/blugnu/test"
+
+	"github.com/blugnu/test-report/internal"
 )
 
 func TestMainFunc(t *testing.T) {
@@ -24,11 +26,10 @@ func TestMainFunc(t *testing.T) {
 					os.Remove(os.Stdin.Name())
 					os.Stdin = ogin
 				}()
+				defer test.Using(&os.Args, []string{"test-report"})()
+				defer test.Using(&osExit, func(int) {})()
 
-				oga := os.Args
-				os.Args = []string{"test-report"}
-				defer func() { os.Args = oga }()
-
+				// ARRANGE ASSERT
 				defer test.ExpectPanic(nil).Assert(t)
 
 				// ACT
@@ -38,17 +39,12 @@ func TestMainFunc(t *testing.T) {
 		{scenario: "invalid invocation",
 			exec: func(t *testing.T) {
 				// ARRANGE
-				oga := os.Args
-				defer func() { os.Args = oga }()
-
-				ogpf := parseFlags
-				defer func() { parseFlags = ogpf }()
-
-				os.Args = []string{"test-report", "-invalid-flag"}
-				parseFlags = func(*flag.FlagSet, []string) error {
+				defer test.Using(&os.Args, []string{"test-report", "-invalid-flag"})()
+				defer test.Using(&internal.ParseFlags, func(*flag.FlagSet, []string) error {
 					return errors.New("test error")
-				}
+				})()
 
+				// ARRANGE ASSERT
 				defer test.ExpectPanic(nil).Assert(t)
 
 				// ACT
