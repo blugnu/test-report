@@ -24,6 +24,6 @@ dist/**
 test-report
 
 # test data (generated when parser_test.go is run)
-testdata/*.json
+**/testdata/*.json
 # any test/sample report (md) in the root
 test-report.md

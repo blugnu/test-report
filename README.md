@@ -85,11 +85,13 @@ Options:
 
   -o, --output <filename>   the output filename (default "test-report.md")
 
+  -s, --summary             produce a summary report only (no details of failed tests)
+
   -t, --title <string>      the title text shown in the test report (default "Test Report")
 
   -h, --help                help for test-report
 
-  -v, --verbose             while processing, show the complete output from go test
+  -v, --verbose             while processing, show the (JSON) output from go test
 ```
 
 The name of the output file can be changed by using the `-o` or `--output` option.
@@ -168,7 +170,7 @@ The report details section might appear similar to:
 
 ## Background
 
-This tool was created to satisfy a desire to incorporate a test report into github
+This tool was created to satisfy a desire to incorporate a test report into Github
 action job summaries, for which the HTML produced by existing tools was not suitable.
 
 Markdown seemed to offer a better fit for that use case, and so this tool was born.

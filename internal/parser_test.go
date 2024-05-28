@@ -108,6 +108,36 @@ func TestParse(t *testing.T) {
 				test.That(t, report.numSkipped).Equals(0, "tests skipped")
 			},
 		},
+		{scenario: "verbose==true",
+			exec: func(t *testing.T) {
+				report := &testrun{}
+				input := bytes.NewReader([]byte(`{"Action":"output"}`))
+				p := parser{verbose: true}
+
+				// ACT
+				stdout, _ := test.CaptureOutput(t, func() {
+					_ = p.parse(input, report)
+				})
+
+				// ASSERT
+				stdout.Equals([]string{`{"Action":"output"}`})
+			},
+		},
+		{scenario: "verbose==false",
+			exec: func(t *testing.T) {
+				report := &testrun{}
+				input := bytes.NewReader([]byte(`{"Action":"output"}`))
+				p := parser{verbose: false}
+
+				// ACT
+				stdout, _ := test.CaptureOutput(t, func() {
+					_ = p.parse(input, report)
+				})
+
+				// ASSERT
+				stdout.IsEmpty()
+			},
+		},
 	}
 	for _, tc := range testcases {
 		t.Run(tc.scenario, func(t *testing.T) {

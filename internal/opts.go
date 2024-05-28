@@ -17,20 +17,14 @@ type Options struct{}
 // parse is a method that parses the command line arguments and returns the
 // appropriate command to run (if any).
 func (o *Options) Parse() (interface{ Run(*Options) int }, error) {
-	var (
-		of string     = "test-report.md"
-		rm reportMode = rmFailedTests
-		rt string     = "Test Report"
-
-		opts = struct {
-			h, help    bool
-			f, full    bool
-			o, output  string
-			s, summary bool
-			t, title   string
-		}{}
-	)
-
+	opts := struct {
+		h, help    bool
+		f, full    bool
+		o, output  string
+		s, summary bool
+		t, title   string
+		v, verbose bool
+	}{}
 	if len(os.Args) > 1 {
 		if os.Args[1] == "version" {
 			return showVersion{}, nil
@@ -47,30 +41,21 @@ func (o *Options) Parse() (interface{ Run(*Options) int }, error) {
 		flags.BoolVar(&opts.summary, "summary", false, "")
 		flags.StringVar(&opts.t, "t", "", "report title")
 		flags.StringVar(&opts.title, "title", "", "")
+		flags.BoolVar(&opts.v, "v", false, "verbose output")
+		flags.BoolVar(&opts.verbose, "verbose", false, "")
 		if err := ParseFlags(flags, os.Args[1:]); err != nil {
 			return nil, err
 		}
+	}
+	of := coalesce(opts.o, opts.output, "test-report.md")
+	rt := coalesce(opts.t, opts.title, "Test Report")
 
-		switch {
-		case opts.o != "":
-			of = opts.o
-		case opts.output != "":
-			of = opts.output
-		}
-
-		switch {
-		case opts.t != "":
-			rt = opts.t
-		case opts.title != "":
-			rt = opts.title
-		}
-
-		switch {
-		case opts.f || opts.full:
-			rm = rmAllTests
-		case opts.s || opts.summary:
-			rm = rmSummaryOnly
-		}
+	rm := rmFailedTests
+	if opts.f || opts.full {
+		rm = rmAllTests
+	}
+	if opts.s || opts.summary {
+		rm = rmSummaryOnly
 	}
 
 	switch {
@@ -82,7 +67,7 @@ func (o *Options) Parse() (interface{ Run(*Options) int }, error) {
 			filename: of,
 			title:    rt,
 			mode:     rm,
-			parser:   &parser{},
+			parser:   &parser{verbose: opts.v || opts.verbose},
 		}, nil
 	}
 }

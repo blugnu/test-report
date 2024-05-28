@@ -116,6 +116,22 @@ func TestOpts(t *testing.T) {
 							parser:   &parser{},
 						},
 					},
+					{args: []string{"-v"},
+						result: generateReport{
+							filename: "test-report.md",
+							title:    "Test Report",
+							mode:     rmFailedTests,
+							parser:   &parser{verbose: true},
+						},
+					},
+					{args: []string{"--verbose"},
+						result: generateReport{
+							filename: "test-report.md",
+							title:    "Test Report",
+							mode:     rmFailedTests,
+							parser:   &parser{verbose: true},
+						},
+					},
 				}
 				for _, tc := range testcases {
 					t.Run(fmt.Sprintf("%s", tc.args), func(t *testing.T) {

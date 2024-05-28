@@ -5,15 +5,16 @@ import (
 	"fmt"
 	"io"
 	"math"
+	"os"
 	"regexp"
 	"strings"
 	"time"
 )
 
 type line struct {
-	Time    string   `json:"Time"`
+	Time    string   `json:"Time,omitempty"`
 	Action  string   `json:"Action"`
-	Package string   `json:"Package"`
+	Package string   `json:"Package,omitempty"`
 	Test    *string  `json:"Test,omitempty"`
 	Elapsed *float64 `json:"Elapsed,omitempty"`
 	Output  *string  `json:"Output,omitempty"`
@@ -24,9 +25,10 @@ func (line line) elapsedDur() time.Duration {
 }
 
 type parser struct {
-	pkgs   map[string]*packageinfo
-	tests  map[string]map[string]*testinfo
-	srcref *regexp.Regexp
+	pkgs    map[string]*packageinfo
+	tests   map[string]map[string]*testinfo
+	srcref  *regexp.Regexp
+	verbose bool
 }
 
 func (p *parser) parse(r io.Reader, rpt *testrun) error {
@@ -35,6 +37,10 @@ func (p *parser) parse(r io.Reader, rpt *testrun) error {
 	p.srcref, _ = regexp.Compile(`(.*\.go:[0-9]*): (.*)\n`)
 
 	*rpt = testrun{}
+	echo := func([]byte) (int, error) { return 0, nil }
+	if p.verbose {
+		echo = os.Stdout.Write
+	}
 
 	decoder := json.NewDecoder(r)
 	for {
@@ -44,7 +50,7 @@ func (p *parser) parse(r io.Reader, rpt *testrun) error {
 		}
 
 		s, _ := json.Marshal(l)
-		fmt.Println(string(s))
+		_, _ = echo(s)
 
 		if l.Test == nil && l.Elapsed != nil {
 			rpt.elapsed = l.elapsedDur()
