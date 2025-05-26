@@ -56,14 +56,16 @@ func (p *parser) parse(r io.Reader, rpt *testrun) error {
 			rpt.elapsed = l.elapsedDur()
 		}
 
-		map[string]func(*line, *testrun){
+		if fn, ok := map[string]func(*line, *testrun){
 			"start":  p.addPackage,
 			"run":    p.addTest,
 			"output": p.recordOutput,
 			"pass":   p.recordPass,
 			"fail":   p.recordFailure,
 			"skip":   p.recordSkip,
-		}[l.Action](l, rpt)
+		}[l.Action]; ok {
+			fn(l, rpt)
+		}
 	}
 	p.processOutput()
 

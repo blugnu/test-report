@@ -108,6 +108,28 @@ func TestParse(t *testing.T) {
 				test.That(t, report.numSkipped).Equals(0, "tests skipped")
 			},
 		},
+		{scenario: "new-test/output.json",
+			exec: func(t *testing.T) {
+				report := &testrun{}
+				input, err := os.Open("./testdata/new-test/output.json")
+				if err != nil {
+					t.Fatalf("error loading test data: %s", err)
+				}
+				defer input.Close()
+				p := parser{}
+
+				// ACT
+				err = p.parse(input, report)
+
+				// ASSERT
+				test.Error(t, err).IsNil()
+				test.That(t, len(report.packages)).Equals(11, "number of packages")
+				test.That(t, report.numTests).Equals(896, "number of tests")
+				test.That(t, report.numPassed).Equals(311, "tests passed")
+				test.That(t, report.numFailed).Equals(372, "tests failed")
+				test.That(t, report.numSkipped).Equals(1, "tests skipped")
+			},
+		},
 		{scenario: "verbose==true",
 			exec: func(t *testing.T) {
 				report := &testrun{}

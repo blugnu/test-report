@@ -1,0 +1,6 @@
+{"ImportPath":"./no-code","Action":"build-output","Output":"# ./no-code\n"}
+{"ImportPath":"./no-code","Action":"build-output","Output":"no Go files in /Users/jolyon/Dropbox/dev/github/blugnu/test-report/internal/testdata/no-code\n"}
+{"ImportPath":"./no-code","Action":"build-fail"}
+{"Time":"2025-05-26T15:59:21.255801+12:00","Action":"start","Package":"./no-code"}
+{"Time":"2025-05-26T15:59:21.255847+12:00","Action":"output","Package":"./no-code","Output":"FAIL\t./no-code [setup failed]\n"}
+{"Time":"2025-05-26T15:59:21.255849+12:00","Action":"fail","Package":"./no-code","Elapsed":0,"FailedBuild":"./no-code"}
